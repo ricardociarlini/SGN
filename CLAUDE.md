@@ -13,7 +13,15 @@ Site estático de página única, **HTML + CSS puro, sem build e sem JavaScript*
 Não há package manager, bundler, lint nem testes — e não deve haver, a menos que o usuário peça.
 Para ver o resultado, basta abrir `index.html` no navegador. Deploy é upload dos arquivos.
 
-Não é um repositório git. Se for necessário versionar, confirme antes de rodar `git init`.
+### Versionamento
+
+O projeto é versionado em https://github.com/ricardociarlini/SGN.git (branch `main`).
+O usuário quer que **toda alteração concluída seja enviada para lá** — ao terminar uma mudança,
+faça commit e `git push` sem precisar perguntar. Commits em português, no imperativo.
+
+O `user.email` está definido **localmente** neste repo como o pessoal
+(`ricardociarlinitrabalho@gmail.com`), para não vazar o e-mail corporativo do `--global`.
+Não remova essa configuração local.
 
 ### Convenções do código
 
