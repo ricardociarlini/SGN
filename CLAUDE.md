@@ -23,6 +23,17 @@ O `user.email` está definido **localmente** neste repo como o pessoal
 (`ricardociarlinitrabalho@gmail.com`), para não vazar o e-mail corporativo do `--global`.
 Não remova essa configuração local.
 
+**O repositório é público** — foi preciso para o GitHub Pages funcionar no plano free.
+Nunca comite credencial, chave ou dado pessoal de terceiro aqui.
+
+### Deploy
+
+O site é publicado pelo **GitHub Pages** a partir da raiz da `main`, em
+https://ricardociarlini.github.io/SGN/ — ou seja, **`git push` é o deploy**. Não há etapa de build.
+O `.nojekyll` desliga o processamento do Jekyll; mantenha o arquivo.
+Todos os caminhos no HTML são relativos (`css/…`, `img/…`) porque o site é servido em um
+subdiretório (`/SGN/`) — nunca use caminho absoluto começando com `/`.
+
 ### Convenções do código
 
 - Mobile-first: o CSS base é o layout de celular; os breakpoints (560 / 720 / 900 px) ficam
