@@ -1,0 +1,720 @@
+/* =========================================================
+   SGN — Produção e edição de mídias audiovisuais
+   Folha de estilo única. Mobile-first.
+
+   Direção: "sala de cor". Preto neutro de sala de correção,
+   quase monocromático; hierarquia por escala, peso e fio de 1px.
+   Metadados em monoespaçada (leitura de timecode/EDL).
+   O âmbar é raro por decisão — marca só o que é ação ou índice.
+   ========================================================= */
+
+:root {
+  --bg:            #08090a;
+  --bg-alt:        #0e0f11;
+  --surface:       #14161a;
+  --line:          rgba(255, 255, 255, .09);
+  --line-strong:   rgba(255, 255, 255, .20);
+
+  --fg:            #f4f2ee;
+  --fg-muted:      #9c9a95;
+  --fg-dim:        #6a6864;
+
+  --accent:        #b9a46a;   /* âmbar dessaturado — luz de estúdio, sem brilho de ouro */
+  --accent-hi:     #d3bd80;
+  --accent-soft:   rgba(185, 164, 106, .12);
+
+  --display: "Archivo", "Inter", -apple-system, "Segoe UI", Arial, sans-serif;
+  --sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, Consolas, "Courier New", monospace;
+
+  --wrap: 1200px;
+  --pad: clamp(1.25rem, 5vw, 3rem);
+  --radius: 2px;              /* quase reto: moldura técnica, não cartão */
+
+  --ease: cubic-bezier(.2, .7, .3, 1);
+}
+
+/* ---------- base ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, iframe { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+h1, h2, h3 { margin: 0; font-weight: 500; line-height: 1.05; }
+
+p { margin: 0 0 1.1em; }
+
+::selection { background: var(--accent); color: var(--bg); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 999;
+  background: var(--accent);
+  color: var(--bg);
+  padding: .7rem 1.2rem;
+  font-family: var(--mono);
+  font-size: .8rem;
+}
+.skip-link:focus { left: .5rem; top: .5rem; }
+
+/* ---------- etiquetas monoespaçadas (o "metadado" do projeto) ---------- */
+
+.tag {
+  font-family: var(--mono);
+  font-size: .7rem;
+  font-weight: 400;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 1.5rem;
+}
+.tag-idx {
+  color: var(--accent);
+  margin-right: .7rem;
+}
+
+/* ---------- marcas de enquadramento ----------
+   Quatro cantos em L desenhados só com gradientes: mesma linguagem
+   do símbolo da marca, sem markup extra. */
+
+.framed { position: relative; }
+
+.framed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  --c: rgba(244, 242, 238, .38);
+  --l: 14px;                 /* comprimento do braço */
+  background-image:
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c));
+  background-repeat: no-repeat;
+  background-size:
+    1px var(--l), var(--l) 1px,   /* topo-esq: vertical, horizontal */
+    1px var(--l), var(--l) 1px,   /* topo-dir */
+    1px var(--l), var(--l) 1px,   /* base-esq */
+    1px var(--l), var(--l) 1px;   /* base-dir */
+  background-position:
+    left top, left top,
+    right top, right top,
+    left bottom, left bottom,
+    right bottom, right bottom;
+}
+
+/* ---------- header ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8, 9, 10, .82);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 76px;
+}
+
+.brand { display: flex; align-items: center; gap: .8rem; }
+
+/* símbolo da marca — herda a cor do texto; o âmbar vem do --accent */
+.logo-mark {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  color: var(--fg);
+  transition: opacity .3s var(--ease);
+}
+.logo-mark.small { width: 22px; height: 22px; }
+.brand:hover .logo-mark { opacity: .75; }
+
+.brand-text { display: flex; flex-direction: column; gap: .18rem; }
+
+.brand-mark {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: .01em;
+  line-height: 1;
+  color: var(--fg);
+}
+.brand-mark.small { font-size: 1rem; }
+
+.brand-sub {
+  display: none;
+  font-family: var(--mono);
+  font-size: .62rem;
+  line-height: 1.2;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(.9rem, 2.2vw, 1.9rem);
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.nav a {
+  color: var(--fg-muted);
+  transition: color .25s var(--ease);
+  white-space: nowrap;
+}
+.nav a:hover { color: var(--fg); }
+
+.nav-idx { color: var(--fg-dim); margin-right: .35rem; }
+.nav a:hover .nav-idx { color: var(--accent); }
+
+.nav a:not(.nav-cta) { display: none; }
+
+.nav-cta {
+  color: var(--fg) !important;
+  border: 1px solid var(--line-strong);
+  padding: .55rem 1.1rem;
+  transition: border-color .25s var(--ease), background .25s var(--ease);
+}
+.nav-cta:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  padding-top: clamp(4.5rem, 14vw, 9rem);
+  padding-bottom: clamp(3rem, 7vw, 5rem);
+  overflow: hidden;
+}
+
+/* luz de estúdio: uma fonte quente, uma fria, ambas fracas */
+.hero-bg {
+  position: absolute;
+  inset: -25% -12% auto -12%;
+  height: 130%;
+  background:
+    radial-gradient(46% 58% at 14% 6%,  rgba(185, 164, 106, .13), transparent 70%),
+    radial-gradient(52% 52% at 90% 26%, rgba(64, 96, 138, .13), transparent 72%);
+  filter: blur(24px);
+  pointer-events: none;
+}
+
+/* grão de película */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .4;
+  background-image: repeating-linear-gradient(
+    0deg, rgba(255,255,255,.013) 0 1px, transparent 1px 3px
+  );
+}
+
+.hero-inner { position: relative; }
+
+.hero-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(2.9rem, 12vw, 7.5rem);
+  letter-spacing: -.04em;
+  line-height: .93;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+/* "intenção" em contorno: o traço vazado é o respiro da composição */
+.hero-title .hl { color: var(--fg-muted); }
+
+@supports (-webkit-text-stroke: 1px currentColor) {
+  .hero-title .hl {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--accent);
+  }
+}
+
+.hero-body { display: grid; gap: 2rem; }
+
+.hero-lead {
+  max-width: 48ch;
+  font-size: clamp(1rem, 2.2vw, 1.18rem);
+  color: var(--fg-muted);
+  margin: 0;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  font-family: var(--mono);
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  transition: background .25s var(--ease), border-color .25s var(--ease),
+              color .25s var(--ease);
+}
+
+.btn-primary { background: var(--accent); color: var(--bg); font-weight: 500; }
+.btn-primary:hover { background: var(--accent-hi); }
+
+.btn-ghost { border-color: var(--line-strong); color: var(--fg); }
+.btn-ghost:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+/* ---------- régua de percurso ---------- */
+
+.timeline { margin-top: clamp(3.5rem, 10vw, 6.5rem); }
+
+/* fita de ticks: marca curta a cada 8px, marca longa a cada 40px */
+.timeline-ruler {
+  height: 14px;
+  border-top: 1px solid var(--line-strong);
+  background-image:
+    repeating-linear-gradient(90deg, var(--line-strong) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 8px);
+  background-size: 100% 9px, 100% 5px;
+  background-repeat: no-repeat;
+  background-position: left top, left top;
+}
+
+.timeline-marks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.8rem;
+}
+
+.timeline-marks li {
+  position: relative;
+  padding-top: 1.4rem;
+}
+/* o "marcador" que ancora cada item na régua */
+.timeline-marks li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+}
+
+.tm-key {
+  display: block;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.35rem, 3.6vw, 1.85rem);
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  margin-bottom: .45rem;
+}
+
+.tm-val {
+  display: block;
+  max-width: 24ch;
+  font-family: var(--mono);
+  font-size: .74rem;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  color: var(--fg-dim);
+}
+
+/* ---------- seções ---------- */
+
+.section { padding-block: clamp(4.5rem, 13vw, 9rem); }
+
+.section-alt {
+  background: var(--bg-alt);
+  border-block: 1px solid var(--line);
+}
+
+.section-head { margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+
+.section-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(2rem, 6.5vw, 3.6rem);
+  letter-spacing: -.035em;
+  line-height: 1;
+}
+
+.grid-2 { display: grid; gap: clamp(2.5rem, 6vw, 4rem); }
+
+.prose { max-width: 62ch; color: var(--fg-muted); }
+.prose .lead {
+  font-size: clamp(1.08rem, 2.4vw, 1.28rem);
+  color: var(--fg);
+  line-height: 1.5;
+}
+.prose em { color: var(--fg); font-style: italic; }
+.prose strong { color: var(--fg); font-weight: 500; }
+
+/* serviços */
+.services {
+  list-style: none;
+  margin: clamp(3.5rem, 9vw, 6rem) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.services li {
+  background: var(--bg);
+  padding: 2.2rem 1.9rem 2.4rem;
+  transition: background .3s var(--ease);
+}
+.services li:hover { background: var(--surface); }
+
+.svc-idx {
+  display: block;
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .16em;
+  color: var(--accent);
+  margin-bottom: 1.4rem;
+}
+
+.services h3 {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: -.015em;
+  margin-bottom: .8rem;
+}
+
+.services p {
+  margin: 0;
+  font-size: .92rem;
+  color: var(--fg-dim);
+  line-height: 1.6;
+}
+
+/* ---------- foto da ilha de edição ---------- */
+
+.about-photo { margin: 0; }
+
+/* a moldura acompanha só a imagem, não a legenda */
+.about-photo.framed::after {
+  inset: 0 0 auto 0;
+  aspect-ratio: 3 / 2;
+}
+
+.about-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.about-photo figcaption {
+  padding-top: .9rem;
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+/* ---------- cursos ---------- */
+
+.curso-conteudo {
+  display: grid;
+  gap: clamp(2.2rem, 6vw, 3.2rem);
+}
+
+.curso-cta-texto {
+  margin-bottom: 1.2rem;
+  color: var(--fg-dim);
+  font-size: .92rem;
+}
+
+.curso-cta { display: flex; flex-wrap: wrap; gap: .8rem; }
+/* apoio, não chamada principal — botões um ponto menores */
+.curso-cta .btn { padding: .85rem 1.5rem; font-size: .72rem; }
+
+.curso-video { margin: 0; }
+/* o vídeo não precisa dominar a coluna */
+.curso-video .reel-frame,
+.curso-video .reel-meta { max-width: 300px; }
+
+/* ---------- reels (carrossel só de CSS) ---------- */
+
+.rail-wrap { position: relative; }
+
+/* sangra até a borda da tela no celular; o conteúdo segue alinhado
+   ao .wrap por causa do scroll-padding */
+.reel-rail {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--pad) .4rem;
+  margin-inline: calc(var(--pad) * -1);
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--pad);
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.reel-rail::-webkit-scrollbar { height: 5px; }
+.reel-rail::-webkit-scrollbar-track { background: transparent; }
+.reel-rail::-webkit-scrollbar-thumb { background: var(--line-strong); }
+
+/* largura única — reconhecimento e trabalhos ficam do mesmo tamanho */
+.reel {
+  margin: 0;
+  flex: 0 0 min(76vw, 300px);
+  scroll-snap-align: start;
+}
+
+.rail-hint {
+  margin: 1.2rem 0 0;
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.reel-frame {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: border-color .3s var(--ease);
+}
+.reel:hover .reel-frame,
+.curso-video:hover .reel-frame { border-color: var(--line-strong); }
+
+.reel-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.reel-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: .9rem;
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.platform { color: var(--fg-dim); }
+
+.reel-meta a {
+  color: var(--fg-muted);
+  transition: color .25s var(--ease);
+  white-space: nowrap;
+}
+.reel-meta a:hover { color: var(--accent); }
+
+/* ---------- contato ---------- */
+
+/* os fundos alternam alt/bg ao longo da página; o contato fecha no fundo base */
+.contato { background: var(--bg); border-top: 1px solid var(--line); }
+
+.contato-title { font-size: clamp(2.4rem, 9vw, 5rem); }
+
+.contato-lead {
+  margin: 1.6rem 0 0;
+  max-width: 46ch;
+  color: var(--fg-muted);
+  font-size: 1.02rem;
+}
+
+.contact-cards {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.contact-card {
+  display: block;
+  padding: 2.4rem 1.9rem;
+  background: var(--bg);
+  transition: background .3s var(--ease);
+}
+.contact-card:hover { background: var(--surface); }
+
+.cc-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.cc-value {
+  display: block;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.3rem, 4.2vw, 1.9rem);
+  letter-spacing: -.025em;
+  line-height: 1.15;
+  word-break: break-word;
+  margin-bottom: 1.2rem;
+}
+
+.cc-go {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  transition: color .25s var(--ease);
+}
+.contact-card:hover .cc-go { color: var(--fg); }
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding-block: 2.6rem;
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  color: var(--fg-dim);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.footer-brand { display: flex; align-items: center; gap: .6rem; }
+.footer-inner p { margin: 0; }
+.to-top { transition: color .25s var(--ease); }
+.to-top:hover { color: var(--accent); }
+
+/* =========================================================
+   Breakpoints
+   ========================================================= */
+
+@media (min-width: 560px) {
+  .reel { flex-basis: 300px; }
+  .contact-cards { grid-template-columns: repeat(2, 1fr); }
+  .timeline-marks { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem; }
+}
+
+@media (min-width: 720px) {
+  .nav a:not(.nav-cta) { display: inline; }
+  .services { grid-template-columns: repeat(3, 1fr); }
+  .curso-conteudo {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    align-items: start;
+  }
+  .hero-body {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 3rem;
+  }
+  .footer-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 900px) {
+  .brand-sub { display: block; }
+  .nav { font-size: .68rem; }
+  .grid-2 { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+  .timeline-marks { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .reel { flex-basis: 320px; }
+  .framed::after { --l: 18px; }
+  /* no desktop o carrossel volta a respeitar a coluna do .wrap */
+  .reel-rail {
+    margin-inline: 0;
+    padding-inline: 0;
+    scroll-padding-inline: 0;
+  }
+  /* com 2 reels não há transbordo neste tamanho — a dica seria mentira */
+  #reconhecimento .rail-hint { display: none; }
+}
+
+/* ---------- preferências do usuário ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+@media print {
+  .site-header, .hero-bg, .reel-frame, .framed::after { display: none; }
+  body { background: #fff; color: #000; }
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160"
+     role="img" aria-label="SGN">
+  <!-- símbolo SGN: marcas de enquadramento + cabeçote de reprodução -->
+  <rect width="160" height="160" rx="34" fill="#08090a"/>
+  <g transform="translate(16 16)" fill="none" stroke="#f4f2ee" stroke-width="9"
+     stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M14 46V14h32"/>
+    <path d="M82 14h32v32"/>
+    <path d="M114 82v32H82"/>
+    <path d="M46 114H14V82"/>
+  </g>
+  <g transform="translate(16 16)">
+    <rect x="52" y="22" width="24" height="13" fill="#b9a46a"/>
+    <path d="M64 35v71" stroke="#b9a46a" stroke-width="7" stroke-linecap="butt"/>
+  </g>
+</svg>

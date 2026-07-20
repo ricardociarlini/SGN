@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 160" width="560" height="160"
+     role="img" aria-label="SGN — Produção e edição de mídias audiovisuais">
+  <title>SGN — Produção e edição de mídias audiovisuais</title>
+
+  <!-- símbolo: marcas de enquadramento + cabeçote de reprodução -->
+  <g transform="translate(16 16)" fill="none" stroke="#f4f2ee" stroke-width="9"
+     stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M14 46V14h32"/>
+    <path d="M82 14h32v32"/>
+    <path d="M114 82v32H82"/>
+    <path d="M46 114H14V82"/>
+  </g>
+  <g transform="translate(16 16)">
+    <rect x="52" y="22" width="24" height="13" fill="#b9a46a"/>
+    <path d="M64 35v71" stroke="#b9a46a" stroke-width="7"/>
+  </g>
+
+  <!-- wordmark -->
+  <g fill="#f4f2ee">
+    <text x="188" y="82" font-family="Archivo, Inter, 'Segoe UI', Arial, sans-serif"
+          font-size="62" font-weight="600" letter-spacing="2">SGN</text>
+    <text x="190" y="112" font-family="'IBM Plex Mono', Consolas, monospace"
+          font-size="13.5" letter-spacing="3.6" fill="#9c9a95">PRODUÇÃO E EDIÇÃO</text>
+    <text x="190" y="133" font-family="'IBM Plex Mono', Consolas, monospace"
+          font-size="13.5" letter-spacing="3.6" fill="#9c9a95">DE MÍDIAS AUDIOVISUAIS</text>
+  </g>
+</svg>

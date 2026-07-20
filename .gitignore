@@ -1,0 +1,7 @@
+# capturas de tela usadas só para conferir o layout
+_shot*.png
+
+# lixo de sistema
+Thumbs.db
+desktop.ini
+.DS_Store
