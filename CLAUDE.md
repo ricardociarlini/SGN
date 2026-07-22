@@ -8,7 +8,10 @@ Site estático de página única, **HTML + CSS puro, sem build e sem JavaScript*
 
 - `index.html` — a página inteira
 - `css/style.css` — folha de estilo única
-- `Esse site dever ser elaborado como.txt` — briefing do cliente (fonte de verdade do conteúdo)
+
+O briefing do cliente (`Esse site dever ser elaborado como.txt`) foi removido do working tree a
+pedido do usuário em 22/07/2026, mas segue sendo a fonte de verdade do conteúdo — recupere-o do
+histórico com `git show 545ef8b:"Esse site dever ser elaborado como.txt"` quando precisar conferir.
 
 Não há package manager, bundler, lint nem testes — e não deve haver, a menos que o usuário peça.
 Para ver o resultado, basta abrir `index.html` no navegador. Deploy é upload dos arquivos.
@@ -95,7 +98,8 @@ com as seções definidas pelo briefing, nesta ordem:
 briefing, mas foi confirmado pelo usuário em 20/07/2026: o Sérgio é do Rio. É informação válida —
 não remova por ausência no briefing.
 
-As URLs exatas dos reels estão no arquivo de briefing — sempre copie de lá, nunca de memória.
+As URLs exatas dos reels estão no briefing (no histórico do git — ver "Estado atual do projeto")
+e já aplicadas no `index.html` — sempre copie de uma dessas fontes, nunca de memória.
 Os fundos das seções alternam `--bg` / `--bg-alt`: ao inserir uma seção nova, mantenha a alternância.
 
 ## Restrições vindas do briefing
