@@ -64,7 +64,8 @@ subdiretório (`/SGN/`) — nunca use caminho absoluto começando com `/`.
   tamanhos pequenos — janelas menores que ~500px renderizam cortado no headless.
 - As seções de reels usam `.reel-rail`: no mobile é um carrossel **só de CSS** (flex +
   `scroll-snap-type: x mandatory`), sem JavaScript e sem setas; a partir de 720px vira **grade**
-  (2 colunas de até 320px — Reconhecimento 1×2, Trabalhos 2×2) e a dica "Arraste" some.
+  (2 colunas — Trabalhos 2×2) e a dica "Arraste" some; a partir de 900px são 4 colunas
+  (Trabalhos numa linha só; Reconhecimento ocupa as 2 primeiras colunas da mesma grade).
   Os cards têm a mesma largura nas duas seções — mude em `.reel`/`.reel-rail`, não por seção.
   Cada card tem um índice `.reel-idx` (01 / 04…) em âmbar no `.reel-meta` — ao inserir ou
   remover um reel, renumere a seção inteira.

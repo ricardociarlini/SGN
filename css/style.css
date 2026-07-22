@@ -710,6 +710,9 @@ p { margin: 0 0 1.1em; }
   .grid-2 { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
   .timeline-marks { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
   .framed::after { --l: 18px; }
+  /* no desktop os 4 trabalhos ficam numa linha só; o reconhecimento
+     ocupa as 2 primeiras colunas da mesma grade — largura de card igual */
+  .reel-rail { grid-template-columns: repeat(4, minmax(0, 320px)); }
 }
 
 /* ---------- preferências do usuário ---------- */
