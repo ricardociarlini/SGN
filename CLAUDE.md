@@ -62,8 +62,12 @@ subdiretório (`/SGN/`) — nunca use caminho absoluto começando com `/`.
   Para regerar: Chrome headless (`--headless=new --screenshot --window-size=…`) sobre um HTML que
   embuta o SVG em `width:100vw;height:100vh`. Renderize sempre **grande** (720px+) e reamostre para os
   tamanhos pequenos — janelas menores que ~500px renderizam cortado no headless.
-- As seções de reels usam um carrossel **só de CSS** (`.reel-rail`, flex + `scroll-snap-type: x mandatory`),
-  sem JavaScript e sem setas. Os cards têm a mesma largura nas duas seções — mude em `.reel`, não por seção.
+- As seções de reels usam `.reel-rail`: no mobile é um carrossel **só de CSS** (flex +
+  `scroll-snap-type: x mandatory`), sem JavaScript e sem setas; a partir de 720px vira **grade**
+  (2 colunas de até 320px — Reconhecimento 1×2, Trabalhos 2×2) e a dica "Arraste" some.
+  Os cards têm a mesma largura nas duas seções — mude em `.reel`/`.reel-rail`, não por seção.
+  Cada card tem um índice `.reel-idx` (01 / 04…) em âmbar no `.reel-meta` — ao inserir ou
+  remover um reel, renumere a seção inteira.
 - A foto da seção Apresentação é `.about-photo` (razão 3/2, `object-fit: cover`). O arquivo é
   `img/Sergio_ilha_edicao_202607221205.jpeg`, foto real do Sérgio na ilha de edição.
 - Os reels são `<iframe loading="lazy">` dentro de `.reel-frame` (razão fixa 9/16):

@@ -558,7 +558,6 @@ p { margin: 0 0 1.1em; }
 .reel-meta {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
   gap: 1rem;
   padding-top: .9rem;
   font-family: var(--mono);
@@ -567,9 +566,15 @@ p { margin: 0 0 1.1em; }
   text-transform: uppercase;
 }
 
+/* índice do card, no mesmo papel do âmbar em nav e serviços */
+.reel-idx { color: var(--accent); }
+.reel-idx-total { color: var(--fg-dim); }
+
 .platform { color: var(--fg-dim); }
 
+/* o link encosta na direita; índice e plataforma ficam agrupados à esquerda */
 .reel-meta a {
+  margin-left: auto;
   color: var(--fg-muted);
   transition: color .25s var(--ease);
   white-space: nowrap;
@@ -671,6 +676,18 @@ p { margin: 0 0 1.1em; }
 @media (min-width: 720px) {
   .nav a:not(.nav-cta) { display: inline; }
   .services { grid-template-columns: repeat(3, 1fr); }
+  /* o carrossel vira grade: tudo visível, sem transbordo.
+     Reconhecimento fica 1×2; Trabalhos, 2×2 — mesma largura de card. */
+  .reel-rail {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 320px));
+    gap: clamp(1.5rem, 3vw, 2.2rem) clamp(1rem, 2.5vw, 1.5rem);
+    margin-inline: 0;
+    padding: 0;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+  .rail-hint { display: none; }  /* sem transbordo, a dica seria mentira */
   .curso-conteudo {
     grid-template-columns: minmax(0, 1fr) 300px;
     align-items: start;
@@ -692,16 +709,7 @@ p { margin: 0 0 1.1em; }
   .nav { font-size: .68rem; }
   .grid-2 { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
   .timeline-marks { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-  .reel { flex-basis: 320px; }
   .framed::after { --l: 18px; }
-  /* no desktop o carrossel volta a respeitar a coluna do .wrap */
-  .reel-rail {
-    margin-inline: 0;
-    padding-inline: 0;
-    scroll-padding-inline: 0;
-  }
-  /* com 2 reels não há transbordo neste tamanho — a dica seria mentira */
-  #reconhecimento .rail-hint { display: none; }
 }
 
 /* ---------- preferências do usuário ---------- */
