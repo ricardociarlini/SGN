@@ -64,8 +64,8 @@ subdiretório (`/SGN/`) — nunca use caminho absoluto começando com `/`.
   tamanhos pequenos — janelas menores que ~500px renderizam cortado no headless.
 - As seções de reels usam um carrossel **só de CSS** (`.reel-rail`, flex + `scroll-snap-type: x mandatory`),
   sem JavaScript e sem setas. Os cards têm a mesma largura nas duas seções — mude em `.reel`, não por seção.
-- A foto da seção Apresentação é `.about-photo` (razão 3/2). O arquivo atual, `img/sergio-ilha-edicao.svg`,
-  é um placeholder ilustrado: quando houver a foto real do Sérgio na ilha de edição, basta trocar o `src`.
+- A foto da seção Apresentação é `.about-photo` (razão 3/2, `object-fit: cover`). O arquivo é
+  `img/Sergio_ilha_edicao_202607221205.jpeg`, foto real do Sérgio na ilha de edição.
 - Os reels são `<iframe loading="lazy">` dentro de `.reel-frame` (razão fixa 9/16):
   Facebook via `facebook.com/plugins/video.php?href=<url-encoded>`, Instagram via `/reel/<id>/embed`.
   Ambos funcionam sem SDK — não adicione os scripts de embed das plataformas.
